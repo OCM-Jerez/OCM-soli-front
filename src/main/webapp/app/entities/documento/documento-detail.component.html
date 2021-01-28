@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documento">
+            <h2><span jhiTranslate="ocmSoliServerApp.documento.detail.title">Datos documento</span></h2>
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre</span></dt>
+                <dd>
+                    <span>{{ documento?.nombreDeDocumento }}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{ documento?.fechaSubida | date: 'mediumDate'}}</span>
+                </dd>
+                <dt><span>Fichero</span></dt>
+                <dd>
+                    <div *ngIf="documento?.documento">
+                        <a (click)="openFile(documento?.documentoContentType!, documento?.documento)" jhiTranslate="entity.action.open">open</a>
+                        {{ documento?.documentoContentType }}, {{ byteSize(documento.documento) }}
+                    </div>
+                </dd>
+                <dt><span>Observación</span></dt>
+                <dd>
+                    <span>{{ documento?.observacion }}</span>
+                </dd>
+                <dt><span>Ruta</span></dt>
+                <dd>
+                    <span>{{ documento?.ruta }}</span>
+                </dd>
+                <dt><span>Privado</span></dt>
+                <dd>
+                    <span>{{ documento.privado }}</span>
+                </dd>
+                <dt><span>Solicitud</span></dt>
+                <dd>
+                    <div *ngIf="documento?.solicitudId">
+                        <a [routerLink]="['/solicitud', documento.solicitudId, 'view']">{{ documento?.solicitudDescripcion }}</a>
+                    </div>
+                </dd>
+                <dt><span>Gestión</span></dt>
+                <dd>
+                    <div *ngIf="documento.gestionId">
+                        <a [routerLink]="['/gestion', documento.gestionId, 'view']">{{ documento?.gestionDetalle }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/documento', documento?.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

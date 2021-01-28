@@ -1,0 +1,101 @@
+<div class = "container">
+    <h2 id="page-heading">
+        <span>Documentos</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-documento"
+            [routerLink]="['/documento/new']"
+            *jhiHasAnyAuthority="'ROLE_ADMIN'"
+            >
+            <fa-icon icon="plus"></fa-icon>
+            <span>Crear nuevo documento</span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="documentos?.length === 0">
+        <span jhiTranslate="ocmSoliServerApp.documento.home.notFound">No documentos found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="documentos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th> -->
+                    <th scope="col"  jhiSortBy="nombreDeDocumento"><span>Nombre documento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaSubida"><span>Fecha</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span>Documento</span></th>
+                    <th scope="col"><span>Observación</span></th>
+                    <!-- <th scope="col"  jhiSortBy="ruta"><span>Ruta</span> <fa-icon icon="sort"></fa-icon></th> -->
+                    <th scope="col"  jhiSortBy="privado"><span jhiTranslate="ocmSoliServerApp.documento.privado">Privado</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span>Solicitud</span></th>
+                    <!-- <th scope="col"  jhiSortBy="gestionDetalle"><span>Gestion</span> <fa-icon icon="sort"></fa-icon></th> -->
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let documento of documentos ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['/documento', documento.id, 'view']">{{ documento.id }}</a></td>
+                    <td>{{ documento.nombreDeDocumento }}</td> -->
+                    <td><a [routerLink]="['/documento', documento.id, 'view']">{{ documento.nombreDeDocumento }}</a></td>
+                    <td>{{ documento.fechaSubida | date:'mediumDate' }}</td>
+
+                    <td>
+                        <a *ngIf="documento.documento" (click)="openFile(documento.documentoContentType, documento.documento)"><fa-icon icon="eye"></fa-icon>Abrir</a>
+                        <!-- <span *ngIf="documento.documento">{{ documento.documentoContentType }}, {{ byteSize(documento.documento) }}</span> -->
+                    </td>
+
+                    <td>{{ documento.observacion }}</td>
+                    <!-- <td>{{ documento.ruta }}</td> -->
+                    <td>{{ documento.privado }}</td>
+                    <td>
+                        <div *ngIf="documento.solicitud">
+                            <a [routerLink]="['/solicitud', documento.solicitud.id , 'view']" >{{ documento.solicitud.descripcion }}</a>
+                        </div>
+                    </td>
+
+                    <!-- <td>
+                        <div *ngIf="documento.gestionId">
+                            <a [routerLink]="['/gestion', documento.gestionId , 'view']" >{{ documento.gestionDetalle }}</a>
+                        </div>
+                    </td> -->
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/documento', documento.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Ver</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/documento', documento.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(documento)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Borrar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="documentos?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

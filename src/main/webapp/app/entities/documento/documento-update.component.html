@@ -1,0 +1,165 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-documento-heading">Crear o editar documento</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nombreDeDocumento">Nombre documento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreDeDocumento"
+            id="field_nombreDeDocumento"
+            formControlName="nombreDeDocumento"
+          />
+          <div
+            *ngIf="
+              editForm.get('nombreDeDocumento')!.invalid &&
+              (editForm.get('nombreDeDocumento')!.dirty || editForm.get('nombreDeDocumento')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombreDeDocumento')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fechaSubida">Fecha</label>
+          <div class="input-group">
+            <input
+              id="field_fechaSubida"
+              type="text"
+              class="form-control"
+              name="fechaSubida"
+              ngbDatepicker
+              #fechaSubidaDp="ngbDatepicker"
+              formControlName="fechaSubida"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="fechaSubidaDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('fechaSubida')!.invalid && (editForm.get('fechaSubida')!.dirty || editForm.get('fechaSubida')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fechaSubida')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_documento">Documento</label>
+
+          <div>
+            <div *ngIf="editForm.get('documento')!.value" class="form-text text-danger clearfix">
+
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('documentoContentType')!.value, editForm.get('documento')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a><fa-icon icon="eye"></fa-icon>
+                <br />
+
+              <span class="pull-left"
+                >{{ editForm.get('documentoContentType')!.value }}, {{ byteSize(editForm.get('documento')!.value) }}</span>
+
+              <button
+                type="button"
+                (click)="editForm.patchValue({ documento: null }); editForm.patchValue({ documentoContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+
+            </div>
+
+             <!-- Boton seleccionar archivo -->
+            <input
+              type="file"
+              id="file_documento"
+              (change)="setFileData($event, 'documento', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+
+          </div>
+
+          <input type="hidden" class="form-control" name="documento" id="field_documento" formControlName="documento" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="documentoContentType"
+            id="field_documentoContentType"
+            formControlName="documentoContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_observacion">Observación</label
+          >
+          <input type="text" class="form-control" name="observacion" id="field_observacion" formControlName="observacion" />
+        </div>
+
+|          <div class="form-group">
+              <label class="form-control-label" for="field_privado">Privado</label>
+              <input type="checkbox" class="form-control" name="privado" id="field_privado"
+                     formControlName="privado"/>
+          </div>
+
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_ruta">Ruta</label>
+          <input type="text" class="form-control" name="ruta" id="field_ruta" formControlName="ruta" />
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_solicitud">Solicitud</label>
+          <select class="form-control" id="field_solicitud" name="solicitud" formControlName="solicitudId">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="solicitudOption.id" *ngFor="let solicitudOption of solicituds; trackBy: trackById">{{
+              solicitudOption.descripcion
+            }}</option>
+          </select>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="form-control-label" for="field_gestion">Gestión</label>
+          <select class="form-control" id="field_gestion" name="gestion" formControlName="gestionId">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="gestionOption.id" *ngFor="let gestionOption of gestions; trackBy: trackById">{{
+              gestionOption.detalle
+            }}</option>
+          </select>
+        </div> -->
+
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

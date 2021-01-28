@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="solicitud">
+      <h2 style="font-weight: bold">Ver solicitud</h2>
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+      <dl class="row-md jh-entity-details">
+        <dt><span solicitud.descripcion>Descripción</span></dt>
+        <dd>
+          <span>{{ solicitud?.descripcion }}</span>
+        </dd>
+        <dt><span solicitud.observacion>Observaciones</span></dt>
+        <dd>
+          <span>{{ solicitud?.observacion }}</span>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <span solicitud.fechaSolicitud style="font-weight: bold; padding-left: 10px">Fecha Solicitud:</span>
+      <span>{{ solicitud?.fechaSolicitud | date: 'mediumDate' }}</span>
+    </div>
+    <div class="col-sm">
+      <span solicitud.fechaRespuesta style="font-weight: bold; padding-left: 10px">Fecha Respuesta:</span>
+      <span>{{ solicitud?.fechaRespuesta | date: 'mediumDate' }}</span>
+    </div>
+    <div class="col-sm">
+      <span style="font-weight: bold; padding-left: 10px">Días transcurridos:</span>
+      <span style="font-weight: bold" [ngStyle]="{ color: solicitud?.diasRespuesta! > 30 ? 'red' : 'black' }">
+        {{ solicitud?.diasRespuesta }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Documentos asociados -->
+<div class="container mt-5">
+    <h5>Documentos asociados</h5>
+    <button type="button" class="btn btn-primary" (click)="crearDocumento()" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+    > nuevo</button>
+  <div class="alert alert-warning" id="no-result" *ngIf="documentos?.length === 0">
+    <span>No existen documentos</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="documentos?.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col">
+            <span>Descripción</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col">
+            <span>Fecha Subida</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"><span>Observación</span></th>
+          <th scope="col"><span>Anexo</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let documento of documentos; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/documento', documento.id, 'view']">{{ documento.nombreDeDocumento }}</a>
+          </td>
+
+          <td>{{ documento.fechaSubida | date: 'mediumDate' }}</td>
+          <td>{{ documento.observacion }}</td>
+
+          <td>
+            <a
+              *ngIf="documento.documento"
+              (click)="openFile(documento.documentoContentType, documento.documento)"
+              >Abrir</a>
+            <!-- <span *ngIf="documento.documento">{{ documento.documentoContentType }}, {{ byteSize(documento.documento) }}</span> -->
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Gestiones asociadas -->
+<div class="container mt-5">
+    <h5>Gestiones asociadas</h5>
+ <button type="button" class="btn btn-primary" (click)="crearGestion()" *jhiHasAnyAuthority="'ROLE_ADMIN'"
+    > nueva</button>
+  <div class="alert alert-warning" id="no-result" *ngIf="gestions?.length === 0">
+    <span>No existen gestiones</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="gestions?.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>Descripción</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"><span>Fecha</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"><span>Observación</span></th>
+          <th scope="col"><span>Anexo</span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+         <tr *ngFor="let gestion of gestions; trackBy: trackId">
+          <!-- <td><a [routerLink]="['/gestion', gestion.id, 'view']">{{ gestion.id }}</a></td> -->
+          <td>
+            <a [routerLink]="['/gestion', gestion.id, 'view']">{{ gestion.detalle }}</a>
+          </td>
+          <td>{{ gestion.fecha | date: 'mediumDate' }}</td>
+          <td>{{ gestion.observacion }}</td>
+
+          <td>
+            <a
+              *ngIf="gestion.documento"
+              (click)="openFile(gestion.documentoContentType, gestion.documento)"
+              >Abrir</a>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 60px">
+  <div class="row justify-content-center">
+    <div class="col-8 ">
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/solicitud', solicitud?.id, 'edit']" class="btn btn-primary" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

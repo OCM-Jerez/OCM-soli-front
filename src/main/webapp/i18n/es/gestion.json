@@ -1,0 +1,28 @@
+{
+  "ocmSoliServerApp": {
+    "gestion": {
+      "home": {
+        "title": "Gestiones",
+        "createLabel": "Crear nuevo Gestion",
+        "createOrEditLabel": "Crear o editar Gestion",
+        "notFound": "Ningún Gestions encontrado"
+      },
+      "created": "Un nuevo Gestion ha sido creado con el identificador {{ param }}",
+      "updated": "Un Gestion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Gestion ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Gestion {{ id }}?"
+      },
+      "detail": {
+        "title": "Gestion"
+      },
+      "detalle": "Detalle",
+      "fecha": "Fecha",
+      "observacion": "Observacion",
+      "documento": "Documento",
+      "nombreDeDocumento": "Nombre De Documento",
+      "privado": "Privado",
+      "solicitud": "Solicitud"
+    }
+  }
+}

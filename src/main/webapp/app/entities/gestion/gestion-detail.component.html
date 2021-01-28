@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="gestion">
+            <h2><span>Datos gestión</span></h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Detalle</span></dt>
+                <dd>
+                    <span>{{ gestion?.detalle }}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{ gestion?.fecha | date: 'mediumDate'}}</span>
+                </dd>
+                <dt><span>Observación</span></dt>
+                <dd>
+                    <span>{{ gestion?.observacion }}</span>
+                </dd>
+                <dt><span>Documento</span></dt>
+                <dd>
+                    <div *ngIf="gestion.documento">
+                        <a (click)="openFile(gestion?.documentoContentType!, gestion?.documento)" jhiTranslate="entity.action.open">open</a>
+                        {{ gestion?.documentoContentType }}, {{ byteSize(gestion?.documento) }}
+                    </div>
+                </dd>
+                <dt><span>Nombre Documento</span></dt>
+                <dd>
+                    <span>{{ gestion.nombreDeDocumento }}</span>
+                </dd>
+                <dt><span>Privado</span></dt>
+                <dd>
+                    <span>{{ gestion.privado }}</span>
+                </dd>
+                <dt><span>Solicitud</span></dt>
+                <dd>
+                    <div *ngIf="gestion.solicitudId">
+                        <a [routerLink]="['/solicitud', gestion?.solicitudId, 'view']">{{ gestion?.solicitudDescripcion }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/gestion', gestion?.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

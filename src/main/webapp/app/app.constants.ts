@@ -4,5 +4,5 @@
 
 export const VERSION = process.env.VERSION;
 export const DEBUG_INFO_ENABLED = false;
-export const SERVER_API_URL = 'http://mamjerez.es/';
+export const SERVER_API_URL = 'http://localhost:8081/';
 export const BUILD_TIMESTAMP = process.env.BUILD_TIMESTAMP;

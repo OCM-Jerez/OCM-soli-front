@@ -10,6 +10,7 @@ import { Account } from 'app/core/user/account.model';
   templateUrl: './home.component.html',
   styleUrls: ['home.scss']
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;

@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { NavbarComponent } from './navbar.component';
 
+// https://angular.io/api/router/Route
 export const navbarRoute: Route = {
   path: '',
   component: NavbarComponent,

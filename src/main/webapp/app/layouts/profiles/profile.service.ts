@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -8,15 +9,31 @@ import { ProfileInfo, InfoResponse } from './profile-info.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
+  // TODO! Es una ruta que se crea en management.controller.ts
+  // TODO! ¿Qué sentido tiene?
+  // info(): any {
+  //  return {
+  //    activeProfiles: 'no',
+  //    'display-ribbon-on-profiles': 'no'
+  //  };
+  // }
+
   private infoUrl = SERVER_API_URL + 'management/info';
   private profileInfo$!: Observable<ProfileInfo>;
 
   constructor(private http: HttpClient) {}
 
   getProfileInfo(): Observable<ProfileInfo> {
+     // eslint-disable-next-line no-console
+     console.log("profileInfo$: " + this.profileInfo$);
+
     if (this.profileInfo$) {
       return this.profileInfo$;
     }
+
+    this.profileInfo$ = this.http.get<InfoResponse>(this.infoUrl);
+     // eslint-disable-next-line no-console
+     console.log("profileInfo$: " + this.profileInfo$);
 
     this.profileInfo$ = this.http.get<InfoResponse>(this.infoUrl).pipe(
       map((response: InfoResponse) => {
@@ -25,15 +42,27 @@ export class ProfileService {
           inProduction: response.activeProfiles && response.activeProfiles.includes('prod'),
           swaggerEnabled: response.activeProfiles && response.activeProfiles.includes('swagger')
         };
+
+        // eslint-disable-next-line no-console
+         console.log("profileInfo$: " + this.profileInfo$);
+        // eslint-disable-next-line no-console
+        console.log("profileInfo: " + profileInfo);
+
         if (response.activeProfiles && response['display-ribbon-on-profiles']) {
           const displayRibbonOnProfiles = response['display-ribbon-on-profiles'].split(',');
           const ribbonProfiles = displayRibbonOnProfiles.filter(
             profile => response.activeProfiles && response.activeProfiles.includes(profile)
           );
+
           if (ribbonProfiles.length > 0) {
             profileInfo.ribbonEnv = ribbonProfiles[0];
           }
         }
+
+          // TODO!
+          // eslint-disable-next-line no-console
+        console.log("response: " + response);
+
         return profileInfo;
       }),
       shareReplay()

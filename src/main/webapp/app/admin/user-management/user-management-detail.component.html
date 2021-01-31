@@ -38,11 +38,12 @@
                 <dd>{{ user.lastModifiedBy }}</dd>
 
                 <dt><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span></dt>
-                <dd>{{ user.lastModifiedDate | date:'dd/MM/yy HH:mm' }}</dd>
+                <dd>{{ user.lastModifiedDate | date:'dd/MM/yyyy HH:mm' }}</dd>
 
                 <dt><span jhiTranslate="userManagement.profiles">Profiles</span></dt>
                 <dd>
                     <ul class="list-unstyled">
+                        <!--  FIXME: No se ven los roles -->
                         <li *ngFor="let authority of user.authorities">
                             <span class="badge badge-info">{{ authority }}</span>
                         </li>

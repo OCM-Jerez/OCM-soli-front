@@ -53,7 +53,7 @@ export class AccountService {
         tap((account: Account | null) => {
           this.authenticate(account);
           // eslint-disable-next-line no-console
-          console.log(account);
+          // console.log(account);
 
           // After retrieve the account info, the language will be changed to
           // the user's preferred language configured in the account setting

@@ -2,7 +2,7 @@
   "ocmSoliServerApp": {
     "solicitud": {
       "home": {
-        "title": "Solicituds",
+        "title": "Solicitudes",
         "createLabel": "Crear nuevo Solicitud",
         "createOrEditLabel": "Crear o editar Solicitud",
         "notFound": "Ningún Solicituds encontrado"

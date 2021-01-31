@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { JhiEventManager } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
@@ -40,6 +41,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activatedRoute.data
       .pipe(
+        // TODO flatMap esta deprecado.
         flatMap(
           () => this.accountService.identity(),
           (data, account) => {

@@ -105,7 +105,9 @@
                     <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                         <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                     </button>
-                    <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" jhiTranslate="settings.form.button">Save</button>
+                    <button type="button" [disabled]="settingsForm.invalid" class="btn btn-primary" (click)="save()">
+                     <span jhiTranslate="settings.form.button">Save</span>
+                    </button>
                 </div>
 
             </form>

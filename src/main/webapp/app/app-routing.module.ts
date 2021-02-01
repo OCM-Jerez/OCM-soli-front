@@ -33,5 +33,4 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
   exports: [RouterModule]
 })
 
-// TODO ¿Para qué se exporta si esta vacia?
 export class OcmSoliServerAppRoutingModule {}

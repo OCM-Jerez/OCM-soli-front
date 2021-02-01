@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { JhiLanguageService } from 'ng-jhipster';
 
 import { AccountService } from 'app/core/auth/account.service';
@@ -50,14 +51,17 @@ export class SettingsComponent implements OnInit {
     this.account.email = this.settingsForm.get('email')!.value;
     this.account.langKey = this.settingsForm.get('langKey')!.value;
 
+    // TODO! no graba los datos.
+  // No existe Interface para Account.
     this.accountService.save(this.account).subscribe(() => {
-      this.success = true;
-
-      this.accountService.authenticate(this.account);
+    this.success = true;
+    this.accountService.authenticate(this.account);
 
       if (this.account.langKey !== this.languageService.getCurrentLanguage()) {
         this.languageService.changeLanguage(this.account.langKey);
       }
+
     });
+    window.history.back();
   }
 }

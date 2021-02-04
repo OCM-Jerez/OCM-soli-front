@@ -7,6 +7,7 @@ import { passwordResetInitRoute } from './password-reset/init/password-reset-ini
 import { registerRoute } from './register/register.route';
 import { settingsRoute } from './settings/settings.route';
 
+// TODO! Revisar funcionamiento de account y todas us rutas.
 const ACCOUNT_ROUTES = [
                         activateRoute,
                         passwordRoute,

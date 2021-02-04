@@ -26,3 +26,10 @@ Esperamos a que se actualice el repositorio local. Luego ejecutamos el comando d
 actualizar el proyecto en produccion.
 
     docker-compose -f docker-compose.yml up --build -d
+
+
+
+    BrowserSync
+    http://localhost:3001/
+
+    [Browsersync] Proxying: http://localhost:9060

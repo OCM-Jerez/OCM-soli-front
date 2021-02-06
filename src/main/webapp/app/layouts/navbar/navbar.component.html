@@ -61,6 +61,7 @@
               <span jhiTranslate="global.menu.entities.solicitud">Solicitudes</span>
             </a>
           </li>
+
           <li>
             <a
               class="dropdown-item"
@@ -70,9 +71,10 @@
               (click)="collapseNavbar()"
             >
               <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.documento">Documento</span>
+              <span jhiTranslate="global.menu.entities.documento">Documentos</span>
             </a>
           </li>
+
           <li>
             <a
               class="dropdown-item"
@@ -82,15 +84,10 @@
               (click)="collapseNavbar()"
             >
               <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.gestion">Gestion</span>
+              <span jhiTranslate="global.menu.entities.gestion">Gestiones</span>
             </a>
           </li>
-          <li>
-                        <a class="dropdown-item" routerLink="solicitud" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.solicitud">Solicitud</span>
-                        </a>
-                    </li>
+
           <!--jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>
@@ -118,11 +115,47 @@
           </li>
 
           <li>
-            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+            <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active" (click)="collapseNavbar()">
               <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.apidocs">API</span>
+              <span>Auditoria</span>
             </a>
           </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span>Configuración</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span>Swagger</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span>Health</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span>Logs</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+              <span>Metrics</span>
+            </a>
+          </li>
+
           <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
         </ul>
       </li>
@@ -178,7 +211,6 @@
             </a>
           </li>
         </ul>
-
       </li>
     </ul>
   </div>

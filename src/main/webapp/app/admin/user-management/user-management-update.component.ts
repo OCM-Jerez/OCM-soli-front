@@ -68,7 +68,6 @@ export class UserManagementUpdateComponent implements OnInit {
     this.updateUser(this.user);
     if (this.user.id !== undefined) {
       this.user.lastModifiedBy = this.account.login;
-      // TODO! ¿Porque estan comentadass estas lineas?
       // this.user.lastModifiedDate = moment().toDate();
       this.userService.update(this.user).subscribe(
         () => this.onSaveSuccess(),

@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
           pageTitle: 'userManagement.home.title'
         }
       },
-      // TODO! Uso de todas estas rutas
       {
         path: 'audits',
         loadChildren: () => import('./audits/audits.module').then(m => m.AuditsModule)

@@ -9,8 +9,8 @@ import { ProfileInfo, InfoResponse } from './profile-info.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  // TODO! Es una ruta que se crea en management.controller.ts
-  // TODO! ¿Qué sentido tiene?
+  //  Es una ruta que se crea en management.controller.ts
+  // ! ¿Qué sentido tiene?
   // info(): any {
   //  return {
   //    activeProfiles: 'no',
@@ -59,8 +59,7 @@ export class ProfileService {
           }
         }
 
-          // TODO!
-          // eslint-disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.log("response: " + response);
 
         return profileInfo;

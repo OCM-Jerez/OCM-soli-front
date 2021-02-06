@@ -10,9 +10,9 @@ import { ProfileService } from './profile.service';
   selector: 'jhi-page-ribbon',
   template: `
     <!-- <div class="ribbon" *ngIf="ribbonEnv$ | async as ribbonEnv"> -->
-      <!-- TODO: No veo traducción para global.ribbon. -->
+      <!-- No veo traducción para global.ribbon. -->
       <!-- <a href="" jhiTranslate="global.ribbon.{{ ribbonEnv }}">{{ ribbonEnv }}</a> -->
-      <!-- TODO: ¿Se usaria ribbonEnv$ en {{ ribbonEnv }} -->
+      <!-- ¿Se usaria ribbonEnv$ en {{ ribbonEnv }} -->
       <div class="ribbon" >
       <a href="">{{ ribbonEnv }}</a>
     </div>

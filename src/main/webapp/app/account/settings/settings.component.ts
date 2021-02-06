@@ -51,7 +51,6 @@ export class SettingsComponent implements OnInit {
     this.account.email = this.settingsForm.get('email')!.value;
     this.account.langKey = this.settingsForm.get('langKey')!.value;
 
-    // TODO! no graba los datos.
   // No existe Interface para Account.
     this.accountService.save(this.account).subscribe(() => {
     this.success = true;

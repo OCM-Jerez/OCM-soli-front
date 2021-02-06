@@ -41,7 +41,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activatedRoute.data
       .pipe(
-        // TODO flatMap esta deprecado.
+        // flatMap esta deprecado.
         flatMap(
           () => this.accountService.identity(),
           (data, account) => {
